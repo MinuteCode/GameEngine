@@ -6,13 +6,14 @@ using namespace Managers;
 SceneManager::SceneManager()
 {
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 	shaderManager = new ShaderManager();
 	shaderManager->CreateShader("colorShader", "Shaders\\Vertex_Shader.glsl", "Shaders\\Fragment_Shader.glsl");
 
 	viewMatrix = glm::mat4(1.0f, 0.0f, 0.0f, 0.0f,
-							0.0f, 1.0f, 0.0f, 5.0f,
+							0.0f, 1.0f, 0.0f, 0.0f,
 							0.0f, 0.0f, -1.0f, 0.0f,
-							0.0f, 0.0f, 10.0f, 1.0f);
+							0.0f, 0.0f, 5.0f, 1.0f);
 	modelsManager = new ModelsManager();
 }
 
@@ -45,7 +46,7 @@ void SceneManager::NotifyEndFrame()
 void SceneManager::NotifyReshape(int width, int height, int previousWidth, int previousHeight)
 {
 	float ar = (float)glutGet(GLUT_WINDOW_WIDTH) / (float)glutGet(GLUT_WINDOW_HEIGHT);
-	float angle = 45.0f, near1 = 0.1f, far1 = 2000.0f;
+	float angle = 40.0f, near1 = 0.1f, far1 = 2000.0f;
 
 	projectionMatrix[0][0] = 1.0f / (ar * tan(angle / 2.0f));
 	projectionMatrix[1][1] = 1.0f / tan(angle / 2.0f);
